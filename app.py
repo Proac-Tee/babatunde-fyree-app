@@ -21,12 +21,14 @@ import logging
 from logging import Formatter, FileHandler, exception
 from flask_wtf import Form
 from forms import *
-from models import *
 from flask_migrate import Migrate
 from datetime import datetime
 import re
 from operator import itemgetter
 import sys
+
+from models import *
+
 
 # ----------------------------------------------------------------------------#
 # Filters.

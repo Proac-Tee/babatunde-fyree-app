@@ -70,22 +70,6 @@ class Artist(db.Model):
 
     shows = db.relationship("Show", backref="Artist")
 
-    past_shows = (
-        db.session.query(shows)
-        .join(Venue)
-        .filter(shows.Artist.id == shows.artist_id)
-        .filter(shows.start_time > datetime.now())
-        .all()
-    )
-
-    upcoming_shows = (
-        db.session.query(shows)
-        .join(Venue)
-        .filter(shows.Artist.id == shows.artist_id)
-        .filter(shows.start_time > datetime.now())
-        .all()
-    )
-
     def __repr__(self):
         return f"<Artist ID: {self.id}, name: {self.name}>"
 
