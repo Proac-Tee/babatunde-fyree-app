@@ -63,9 +63,8 @@ class Artist(db.Model):
     facebook_link = db.Column(db.String(120))
 
     # TODO: implement any missing fields, as a database migration using Flask-Migrate --- Done
-    genres = db.Column(db.String(120))
     website = db.Column(db.String(120))
-    seeking_talent = db.Column(db.Boolean(), default=False)
+    seeking_venue = db.Column(db.Boolean(), default=False)
     seeking_description = db.Column(db.String(120))
 
     shows = db.relationship("Show", backref="Artist")
@@ -87,6 +86,8 @@ class Show(db.Model):
     venue_id = db.Column(
         db.Integer(), db.ForeignKey("Venue.id", ondelete="CASCADE"), nullable=False
     )
+    venue = db.relationship("Venue")
+    artist = db.relationship("Artist")
 
     def __repr__(self):
         return f"<Show ID: {self.id}, start_time: {self.start_time}>"

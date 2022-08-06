@@ -139,9 +139,21 @@ def show_venue(venue_id):
 
     if venue:
         genres = ((venue.genres.replace("{", "")).replace("}", "")).split(",")
-        past_shows = []
+        past_shows = (
+            db.session.query(Show)
+            .join(Venue)
+            .filter(Show.artist_id == Artist.id)
+            .filter(Show.start_time > datetime.now())
+            .all()
+        )
         past_shows_count = 0
-        upcoming_shows = []
+        upcoming_shows = (
+            db.session.query(Show)
+            .join(Venue)
+            .filter(Show.artist_id == Artist.id)
+            .filter(Show.start_time > datetime.now())
+            .all()
+        )
         upcoming_shows_count = 0
         actual_time = datetime.now()
         for show in venue.shows:
@@ -343,9 +355,21 @@ def show_artist(artist_id):
     # TODO: replace with real artist data from the artist table, using artist_id --- Done
     if artist:
         genres = ((artist.genres.replace("{", "")).replace("}", "")).split(",")
-        past_shows = []
+        past_shows = (
+            db.session.query(Show)
+            .join(Venue)
+            .filter(Show.artist_id == Artist.id)
+            .filter(Show.start_time > datetime.now())
+            .all()
+        )
         past_shows_count = 0
-        upcoming_shows = []
+        upcoming_shows = upcoming_shows = (
+            db.session.query(Show)
+            .join(Venue)
+            .filter(Show.artist_id == Artist.id)
+            .filter(Show.start_time > datetime.now())
+            .all()
+        )
         upcoming_shows_count = 0
         actual_time = datetime.now()
         for show in artist.shows:
